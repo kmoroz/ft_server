@@ -1,6 +1,7 @@
 server {
 	listen 80;
 	listen [::]:80;
-	server_name 42_hogwarts;
-	return 301 https://$host$request_uri;
+	server_name codam;
+	root /var/www/codam;
+	index index.html;
 }

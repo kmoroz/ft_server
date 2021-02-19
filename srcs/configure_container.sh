@@ -1,1 +1,6 @@
-echo "I'm being born"
+nginx -g "daemon off;" 
+echo "nginx is running like"
+
+
+
+
