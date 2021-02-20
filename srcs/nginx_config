@@ -15,6 +15,15 @@ server {
 	ssl_certificate_key /etc/ssl/private/codam.key;
 
 	root /var/www/codam;
-	index index.html;
+	index index.html index.htm index.nginx-debian.html index.php;
 
+	location / {
+		autoindex on;
+		try_files $uri $uri/ =404;
+	}
+
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+	}
 }
