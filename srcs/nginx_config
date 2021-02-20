@@ -2,6 +2,19 @@ server {
 	listen 80;
 	listen [::]:80;
 	server_name codam;
+	return 301 https://$host$request_uri;
+}
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+
+	server_name codam;
+
+	ssl_certificate /etc/ssl/certs/codam.crt;
+	ssl_certificate_key /etc/ssl/private/codam.key;
+
 	root /var/www/codam;
 	index index.html;
+
 }
