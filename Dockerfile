@@ -21,4 +21,9 @@ RUN mv ./srcs/config.inc.php var/www/codam/phpmyadmin
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
 RUN tar -xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz --strip-components 1 -C /var/www/codam/phpmyadmin
 
+RUN wget -c https://wordpress.org/latest.tar.gz
+RUN tar -xvf latest.tar.gz
+RUN mv /wordpress/ /var/www/codam/wordpress
+RUN mv ./srcs/wp-config.php /var/www/codam/wordpress
+
 CMD ./srcs/configure_container.sh
