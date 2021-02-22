@@ -10,7 +10,8 @@ RUN apt-get install -y php7.3-fpm php-common php-mysql
 RUN apt-get install -y wget
 
 RUN mkdir var/www/codam
-RUN echo "<?php phpinfo(); ?>" >> /var/www/codam/index.php
+RUN mv ./srcs/index.html /var/www/codam/
+RUN mv ./srcs/Cetus_small.jpg /var/www/codam/
 RUN mv ./srcs/nginx_config /etc/nginx/sites-available/codam
 
 RUN ln -s /etc/nginx/sites-available/codam /etc/nginx/sites-enabled/codam
@@ -25,5 +26,15 @@ RUN wget -c https://wordpress.org/latest.tar.gz
 RUN tar -xvf latest.tar.gz
 RUN mv /wordpress/ /var/www/codam/wordpress
 RUN mv ./srcs/wp-config.php /var/www/codam/wordpress
+
+RUN wget -c -P ./tmp/ https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x ./tmp/wp-cli.phar
+RUN mv ./tmp/wp-cli.phar /usr/local/bin/wp
+
+RUN bash ./srcs/setup_database.sh
+
+RUN service mysql start && \ 
+wp core install --path='/var/www/codam/wordpress' --allow-root --url="/"  --title="Welcome to ft_shrek!" --admin_user="ksenia" --admin_password="12345678" --admin_email="root@gmail.com" && \
+    mysql -e "USE wordpress;UPDATE wp_options SET option_value='https://localhost/wordpress' WHERE option_name='siteurl' OR option_name='home';"
 
 CMD ./srcs/configure_container.sh
