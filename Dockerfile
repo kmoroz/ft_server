@@ -37,4 +37,7 @@ RUN service mysql start && \
 wp core install --path='/var/www/codam/wordpress' --allow-root --url="/"  --title="Welcome to ft_shrek!" --admin_user="ksenia" --admin_password="12345678" --admin_email="root@gmail.com" && \
     mysql -e "USE wordpress;UPDATE wp_options SET option_value='https://localhost/wordpress' WHERE option_name='siteurl' OR option_name='home';"
 
+RUN		chown -R www-data:www-data /var/www/*
+RUN		chmod -R 755 /var/www/*
+
 CMD ./srcs/configure_container.sh
