@@ -1,5 +1,7 @@
 FROM debian:buster
 
+ENV	AUTOINDEX on
+
 COPY srcs ./srcs/
 
 RUN apt-get update
@@ -10,6 +12,10 @@ RUN apt-get install -y php7.3-fpm php-common php-mysql
 RUN apt-get install -y wget
 
 RUN mkdir var/www/codam
+
+#create autoindexing test files
+RUN mkdir var/www/codam/anime && touch var/www/codam/anime/naruto.jpg
+
 RUN mv ./srcs/index.html /var/www/codam/
 RUN mv ./srcs/styles.css /var/www/codam/
 RUN mv ./srcs/nginx_config /etc/nginx/sites-available/codam
@@ -40,4 +46,4 @@ wp core install --path='/var/www/codam/wordpress' --allow-root --url="/"  --titl
 RUN		chown -R www-data:www-data /var/www/*
 RUN		chmod -R 755 /var/www/*
 
-CMD ./srcs/configure_container.sh
+CMD ./srcs/toggle_autoindex.sh ${AUTOINDEX} && ./srcs/configure_container.sh
