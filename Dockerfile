@@ -18,6 +18,7 @@ RUN mkdir var/www/codam/anime && touch var/www/codam/anime/naruto.jpg
 
 RUN mv ./srcs/index.html /var/www/codam/
 RUN mv ./srcs/styles.css /var/www/codam/
+RUN mv ./srcs/ogre.svg /var/www/codam
 RUN mv ./srcs/nginx_config /etc/nginx/sites-available/codam
 
 RUN ln -s /etc/nginx/sites-available/codam /etc/nginx/sites-enabled/codam
