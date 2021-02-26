@@ -46,5 +46,6 @@ wp core install --path='/var/www/codam/wordpress' --allow-root --url="/"  --titl
 
 RUN		chown -R www-data:www-data /var/www/*
 RUN		chmod -R 755 /var/www/*
+RUN     chmod +x ./srcs/*.sh
 
 CMD ./srcs/toggle_autoindex.sh ${AUTOINDEX} && ./srcs/configure_container.sh
