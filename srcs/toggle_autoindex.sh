@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ "$1" = "off" ]; then
 	sed -i "s/autoindex on/autoindex off/g" /etc/nginx/sites-available/codam
 	echo "autoindex off"
@@ -7,5 +9,6 @@ elif [ "$1" = "on" ]; then
 fi
 
 if [ -e /var/run/nginx.pid ]; then 
-	echo nginx -s reload; 
+	nginx -s reload;
+	echo "nginx reloaded"
 fi
