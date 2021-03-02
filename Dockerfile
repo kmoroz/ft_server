@@ -37,11 +37,11 @@ RUN chmod +x ./tmp/wp-cli.phar
 #2. move it to somewhere in your PATH
 RUN mv ./tmp/wp-cli.phar /usr/local/bin/wp
 
+#make any script in srcs executable
 RUN chmod +x ./srcs/*.sh && ./srcs/setup_database.sh 
 
 #change ownership of /var/www/* to a new user and group www-data 
 #&& allow everyone to read and execute the file, the owner is allowed to write to the file as well
-#&& make any script in srcs executable
 RUN	chown -R www-data:www-data /var/www/* && chmod -R 755 /var/www/*
 
 CMD ./srcs/toggle_autoindex.sh ${AUTOINDEX} && ./srcs/configure_container.sh
