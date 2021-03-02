@@ -30,7 +30,8 @@ RUN tar -xvf latest.tar.gz
 RUN mv /wordpress/ /var/www/codam/wordpress
 RUN mv ./srcs/wp-config.php /var/www/codam/wordpress
 
-RUN wget -c -P ./tmp/ https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+#prefix with the location of the directory to download into
+RUN wget -P ./tmp/ https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 #to use WP-CLI from the command line by typing wp, 1. make the file executable and 
 RUN chmod +x ./tmp/wp-cli.phar
 #2. move it to somewhere in your PATH
