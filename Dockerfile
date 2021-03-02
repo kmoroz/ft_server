@@ -37,7 +37,7 @@ RUN chmod +x ./tmp/wp-cli.phar
 #2. move it to somewhere in your PATH
 RUN mv ./tmp/wp-cli.phar /usr/local/bin/wp
 
-RUN ./srcs/setup_database.sh && chmod +x ./srcs/*.sh
+RUN chmod +x ./srcs/*.sh && ./srcs/setup_database.sh 
 
 #change ownership of /var/www/* to a new user and group www-data 
 #&& allow everyone to read and execute the file, the owner is allowed to write to the file as well
